@@ -1,5 +1,6 @@
 package br.com.brq.challengeIngresso.controller;
 
+import br.com.brq.challengeIngresso.entities.Sexo;
 import br.com.brq.challengeIngresso.entities.Usuario;
 import br.com.brq.challengeIngresso.mappers.UsuarioMapperRequest;
 import br.com.brq.challengeIngresso.mappers.UsuarioMapperResponse;
@@ -26,6 +27,7 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioDto cadastrar(@RequestBody UsuarioInput usuarioInput){
         Usuario usuario = mapperRequest.toEntity(usuarioInput);
+        usuarioService.validar(usuario);
         usuario = usuarioService.salvar(usuario);
 
         return mapperResponse.toDto(usuario);

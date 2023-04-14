@@ -17,7 +17,7 @@ public class UsuarioDto {
     private String apelido;
     private String dataNascimento;
     private BigDecimal celular;
-    private int sexo;
+    private String sexo;
     private OffsetDateTime dataCadastro;
     private Endereco endereco;
 }

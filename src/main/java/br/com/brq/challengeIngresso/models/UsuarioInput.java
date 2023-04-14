@@ -15,7 +15,7 @@ public class UsuarioInput {
     private String apelido;
     private String dataNascimento;
     private BigDecimal celular;
-    private int sexo;
+    private String sexo;
     private Endereco endereco;
 
 }

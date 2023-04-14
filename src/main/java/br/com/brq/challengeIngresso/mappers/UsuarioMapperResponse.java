@@ -1,5 +1,6 @@
 package br.com.brq.challengeIngresso.mappers;
 
+import br.com.brq.challengeIngresso.entities.Sexo;
 import br.com.brq.challengeIngresso.entities.Usuario;
 import br.com.brq.challengeIngresso.models.UsuarioDto;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,9 @@ public class UsuarioMapperResponse {
     private ModelMapper modelMapper;
 
     public UsuarioDto toDto(Usuario usuario) {
-        return modelMapper.map(usuario, UsuarioDto.class);
+
+        UsuarioDto usuarioDto = modelMapper.map(usuario, UsuarioDto.class);
+        usuarioDto.setSexo(Sexo.buscarSigla(usuario.getSexo()));
+        return usuarioDto;
     }
 }

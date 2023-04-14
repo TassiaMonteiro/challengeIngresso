@@ -2,9 +2,7 @@ package br.com.brq.challengeIngresso.entities;
 
 import lombok.Data;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -22,7 +20,7 @@ public class Usuario {
     private String apelido;
     private String dataNascimento;
     private BigDecimal celular;
-    private int sexo;
+    private String sexo;
     private OffsetDateTime dataCadastro;
     private LocalDateTime dataAtualizacao;
     @Embedded
