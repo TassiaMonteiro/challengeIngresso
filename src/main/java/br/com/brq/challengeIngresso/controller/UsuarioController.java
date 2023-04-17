@@ -46,4 +46,10 @@ public class UsuarioController {
         return mapperResponse.toCollectionDto(usuarios);
     }
 
+    @GetMapping("/{id}")
+    public UsuarioDto buscar(@PathVariable String id){
+        Usuario usuario = usuarioService.buscar(id);
+        return mapperResponse.toDto(usuario);
+    }
+
 }

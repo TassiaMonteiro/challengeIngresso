@@ -54,4 +54,9 @@ public class UsuarioService {
         return true;
     }
 
+    public Usuario buscar(String id){
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+    }
+
 }
