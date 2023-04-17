@@ -3,9 +3,13 @@ package br.com.brq.challengeIngresso.mappers;
 import br.com.brq.challengeIngresso.entities.Sexo;
 import br.com.brq.challengeIngresso.entities.Usuario;
 import br.com.brq.challengeIngresso.models.UsuarioDto;
+import br.com.brq.challengeIngresso.models.UsuarioDtoResumo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UsuarioMapperResponse {
@@ -18,5 +22,15 @@ public class UsuarioMapperResponse {
         UsuarioDto usuarioDto = modelMapper.map(usuario, UsuarioDto.class);
         usuarioDto.setSexo(Sexo.buscarSigla(usuario.getSexo()));
         return usuarioDto;
+    }
+
+    public UsuarioDtoResumo toResumodto(Usuario usuario) {
+        return modelMapper.map(usuario, UsuarioDtoResumo.class);
+    }
+
+    public List<UsuarioDtoResumo> toCollectionDto(List<Usuario> usuarios){
+        return usuarios.stream()
+                .map(usuario -> toResumodto(usuario))
+                .collect(Collectors.toList());
     }
 }
