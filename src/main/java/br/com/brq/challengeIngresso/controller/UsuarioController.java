@@ -52,4 +52,10 @@ public class UsuarioController {
         return mapperResponse.toDto(usuario);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable String id){
+        Usuario usuario = usuarioService.buscar(id);
+        usuarioService.remover(usuario);
+    }
 }
