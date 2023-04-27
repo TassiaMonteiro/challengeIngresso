@@ -4,6 +4,7 @@ import br.com.brq.challengeIngresso.entities.Usuario;
 import br.com.brq.challengeIngresso.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -74,6 +75,17 @@ public class UsuarioService {
         OffsetDateTime date = OffsetDateTime.now();
         usuario.setDataAtualizacao(date.truncatedTo(ChronoUnit.SECONDS));
         return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void alterarSenha(String id, String senhaAtual, String novaSenha) {
+        Usuario usuario = buscar(id);
+
+        if (usuario.senhaNaoCoincideCom(senhaAtual)) {
+            throw new RuntimeException("Senha informada não coincide com a senha do usuário.");
+        }
+
+        usuario.setSenha(novaSenha);
     }
 
 }

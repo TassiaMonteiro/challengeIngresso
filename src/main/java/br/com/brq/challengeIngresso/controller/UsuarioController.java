@@ -3,10 +3,7 @@ package br.com.brq.challengeIngresso.controller;
 import br.com.brq.challengeIngresso.entities.Usuario;
 import br.com.brq.challengeIngresso.mappers.UsuarioMapperRequest;
 import br.com.brq.challengeIngresso.mappers.UsuarioMapperResponse;
-import br.com.brq.challengeIngresso.models.UsuarioDto;
-import br.com.brq.challengeIngresso.models.UsuarioDtoResumo;
-import br.com.brq.challengeIngresso.models.UsuarioInput;
-import br.com.brq.challengeIngresso.models.UsuarioInputResumo;
+import br.com.brq.challengeIngresso.models.*;
 import br.com.brq.challengeIngresso.repository.UsuarioRepository;
 import br.com.brq.challengeIngresso.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +66,11 @@ public class UsuarioController {
         usuario = usuarioService.atualizar(usuario);
 
         return mapperResponse.toDto(usuario);
+    }
+
+    @PutMapping("/{id}/senhas")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterarSenha(@PathVariable String id, @RequestBody SenhaInput senha) {
+        usuarioService.alterarSenha(id, senha.getSenhaAtual(), senha.getNovaSenha());
     }
 }
