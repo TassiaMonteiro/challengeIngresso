@@ -6,6 +6,7 @@ import br.com.brq.challengeIngresso.mappers.UsuarioMapperResponse;
 import br.com.brq.challengeIngresso.models.UsuarioDto;
 import br.com.brq.challengeIngresso.models.UsuarioDtoResumo;
 import br.com.brq.challengeIngresso.models.UsuarioInput;
+import br.com.brq.challengeIngresso.models.UsuarioInputResumo;
 import br.com.brq.challengeIngresso.repository.UsuarioRepository;
 import br.com.brq.challengeIngresso.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioDto cadastrar(@RequestBody UsuarioInput usuarioInput){
         Usuario usuario = mapperRequest.toEntity(usuarioInput);
-        usuarioService.validar(usuario);
+        usuarioService.validarCadastro(usuario);
         usuario = usuarioService.salvar(usuario);
 
         return mapperResponse.toDto(usuario);
@@ -57,5 +58,16 @@ public class UsuarioController {
     public void remover(@PathVariable String id){
         Usuario usuario = usuarioService.buscar(id);
         usuarioService.remover(usuario);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioDto atualizar(@PathVariable String id, @RequestBody UsuarioInputResumo usuarioInputResumo){
+        Usuario usuario = usuarioService.buscar(id);
+        mapperRequest.copyToEntity(usuarioInputResumo, usuario);
+        usuarioService.validarAtualizacao(usuario);
+        usuario = usuarioService.atualizar(usuario);
+
+        return mapperResponse.toDto(usuario);
     }
 }

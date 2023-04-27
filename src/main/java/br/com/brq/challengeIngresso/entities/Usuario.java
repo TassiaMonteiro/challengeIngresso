@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -22,7 +21,7 @@ public class Usuario {
     private BigDecimal celular;
     private String sexo;
     private OffsetDateTime dataCadastro;
-    private LocalDateTime dataAtualizacao;
+    private OffsetDateTime dataAtualizacao;
     @Embedded
     private Endereco endereco;
 }
