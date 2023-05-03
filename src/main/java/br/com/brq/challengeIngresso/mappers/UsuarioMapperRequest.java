@@ -23,21 +23,21 @@ public class UsuarioMapperRequest {
 
     public void copyToEntity(UsuarioInputResumo usuarioInputResumo, Usuario usuario){
 
-        if (usuarioInputResumo.getNomeCompleto() == null){
+        if (isCampoEmbranco(usuarioInputResumo.getNomeCompleto())){
             usuarioInputResumo.setNomeCompleto(usuario.getNomeCompleto());
         }
 
-        if (usuarioInputResumo.getApelido() == null){
+        if (isCampoEmbranco(usuarioInputResumo.getApelido())){
             usuarioInputResumo.setApelido(usuario.getApelido());
         }
 
-        if (usuarioInputResumo.getDataNascimento() == null){
+        if (isCampoEmbranco(usuarioInputResumo.getDataNascimento())){
             usuarioInputResumo.setDataNascimento(usuario.getDataNascimento());
         }
 
         if (usuarioInputResumo.getCelular() == null){
             usuarioInputResumo.setCelular(usuario.getCelular());
-        } else
+        }
 
         if(usuarioInputResumo.getSexo() != null) {
             usuarioInputResumo.setSexo(Sexo.buscarValor(usuarioInputResumo.getSexo()));
@@ -49,9 +49,35 @@ public class UsuarioMapperRequest {
 
         if (usuarioInputResumo.getEndereco() == null){
             usuarioInputResumo.setEndereco(usuario.getEndereco());
+        } else {
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getLogradouro())){
+                usuarioInputResumo.getEndereco().setLogradouro(usuario.getEndereco().getLogradouro());
+            }
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getNumero())){
+                usuarioInputResumo.getEndereco().setNumero(usuario.getEndereco().getNumero());
+            }
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getBairro())){
+                usuarioInputResumo.getEndereco().setBairro(usuario.getEndereco().getBairro());
+            }
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getCidade())){
+                usuarioInputResumo.getEndereco().setCidade(usuario.getEndereco().getCidade());
+            }
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getEstado())){
+                usuarioInputResumo.getEndereco().setEstado(usuario.getEndereco().getEstado());
+            }
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getPais())){
+                usuarioInputResumo.getEndereco().setPais(usuario.getEndereco().getPais());
+            }
+            if (isCampoEmbranco(usuarioInputResumo.getEndereco().getCep())){
+                usuarioInputResumo.getEndereco().setCep(usuario.getEndereco().getCep());
+            }
         }
 
         modelMapper.map(usuarioInputResumo, usuario);
+    }
+
+    private static boolean isCampoEmbranco(String campo){
+        return campo == null || campo.isBlank();
     }
 
 }

@@ -1,6 +1,7 @@
 package br.com.brq.challengeIngresso.service;
 
 import br.com.brq.challengeIngresso.entities.Usuario;
+import br.com.brq.challengeIngresso.models.SenhaDto;
 import br.com.brq.challengeIngresso.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,4 +89,21 @@ public class UsuarioService {
         usuario.setSenha(novaSenha);
     }
 
+    public SenhaDto gerarUUID(String id){
+        SenhaDto senhaDto = new SenhaDto();
+        String uuid = UUID.randomUUID().toString();
+        senhaDto.setId(uuid);
+        return senhaDto;
+    }
+
+    public void isUUID(String codigo){
+        if(!codigo.matches("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")){
+            throw new RuntimeException("Codigo de segurança deve ser do tipo UUID.");
+        }
+    }
+    
+    public void novaSenha(String id, String novaSenha){
+        Usuario usuario = buscar(id);
+        usuario.setSenha(novaSenha); ;
+    }
 }

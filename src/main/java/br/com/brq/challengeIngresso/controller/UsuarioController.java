@@ -73,4 +73,20 @@ public class UsuarioController {
     public void alterarSenha(@PathVariable String id, @RequestBody SenhaInput senha) {
         usuarioService.alterarSenha(id, senha.getSenhaAtual(), senha.getNovaSenha());
     }
+
+    @GetMapping("/{id}/senhas")
+    @ResponseStatus(HttpStatus.OK)
+    public SenhaDto gerarCodigo(@PathVariable String id){
+        Usuario usuario = usuarioService.buscar(id);
+        SenhaDto senhaDto = new SenhaDto();
+        return usuarioService.gerarUUID(senhaDto.getId());
+    }
+
+    @PostMapping("/{id}/senhas")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void novaSenha(@PathVariable String id, @RequestBody NovaSenhaInput novaSenhaInput){
+        usuarioService.isUUID(novaSenhaInput.getCodigoSeguranca());
+        usuarioService.novaSenha(id, novaSenhaInput.getNovaSenha());
+    }
+
 }
