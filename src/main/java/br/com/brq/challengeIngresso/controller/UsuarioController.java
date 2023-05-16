@@ -3,13 +3,20 @@ package br.com.brq.challengeIngresso.controller;
 import br.com.brq.challengeIngresso.entities.Usuario;
 import br.com.brq.challengeIngresso.mappers.UsuarioMapperRequest;
 import br.com.brq.challengeIngresso.mappers.UsuarioMapperResponse;
-import br.com.brq.challengeIngresso.models.*;
+import br.com.brq.challengeIngresso.models.dto.SenhaDto;
+import br.com.brq.challengeIngresso.models.dto.UsuarioDto;
+import br.com.brq.challengeIngresso.models.dto.UsuarioDtoResumo;
+import br.com.brq.challengeIngresso.models.input.NovaSenhaInput;
+import br.com.brq.challengeIngresso.models.input.SenhaInput;
+import br.com.brq.challengeIngresso.models.input.UsuarioInput;
+import br.com.brq.challengeIngresso.models.input.UsuarioInputResumo;
 import br.com.brq.challengeIngresso.repository.UsuarioRepository;
 import br.com.brq.challengeIngresso.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +37,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UsuarioDto cadastrar(@RequestBody UsuarioInput usuarioInput){
+    public UsuarioDto cadastrar(@RequestBody @Valid UsuarioInput usuarioInput){
         Usuario usuario = mapperRequest.toEntity(usuarioInput);
         usuarioService.validarCadastro(usuario);
         usuario = usuarioService.salvar(usuario);
@@ -59,10 +66,9 @@ public class UsuarioController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UsuarioDto atualizar(@PathVariable String id, @RequestBody UsuarioInputResumo usuarioInputResumo){
+    public UsuarioDto atualizar(@PathVariable String id, @RequestBody @Valid UsuarioInputResumo usuarioInputResumo){
         Usuario usuario = usuarioService.buscar(id);
         mapperRequest.copyToEntity(usuarioInputResumo, usuario);
-        usuarioService.validarAtualizacao(usuario);
         usuario = usuarioService.atualizar(usuario);
 
         return mapperResponse.toDto(usuario);
@@ -77,7 +83,7 @@ public class UsuarioController {
     @GetMapping("/{id}/senhas")
     @ResponseStatus(HttpStatus.OK)
     public SenhaDto gerarCodigo(@PathVariable String id){
-        Usuario usuario = usuarioService.buscar(id);
+        usuarioService.buscar(id);
         SenhaDto senhaDto = new SenhaDto();
         return usuarioService.gerarUUID(senhaDto.getId());
     }

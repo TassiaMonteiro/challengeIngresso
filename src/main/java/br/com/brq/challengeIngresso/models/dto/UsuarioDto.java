@@ -1,4 +1,4 @@
-package br.com.brq.challengeIngresso.models;
+package br.com.brq.challengeIngresso.models.dto;
 
 import br.com.brq.challengeIngresso.entities.Endereco;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,7 +16,7 @@ public class UsuarioDto {
     private String nomeCompleto;
     private String apelido;
     private String dataNascimento;
-    private BigDecimal celular;
+    private Long celular;
     private String sexo;
     private OffsetDateTime dataCadastro;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)

@@ -2,8 +2,8 @@ package br.com.brq.challengeIngresso.mappers;
 
 import br.com.brq.challengeIngresso.entities.Sexo;
 import br.com.brq.challengeIngresso.entities.Usuario;
-import br.com.brq.challengeIngresso.models.UsuarioInput;
-import br.com.brq.challengeIngresso.models.UsuarioInputResumo;
+import br.com.brq.challengeIngresso.models.input.UsuarioInput;
+import br.com.brq.challengeIngresso.models.input.UsuarioInputResumo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

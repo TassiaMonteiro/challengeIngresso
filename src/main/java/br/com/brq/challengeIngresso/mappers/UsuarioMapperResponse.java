@@ -2,13 +2,14 @@ package br.com.brq.challengeIngresso.mappers;
 
 import br.com.brq.challengeIngresso.entities.Sexo;
 import br.com.brq.challengeIngresso.entities.Usuario;
-import br.com.brq.challengeIngresso.models.UsuarioDto;
-import br.com.brq.challengeIngresso.models.UsuarioDtoResumo;
+import br.com.brq.challengeIngresso.models.dto.UsuarioDto;
+import br.com.brq.challengeIngresso.models.dto.UsuarioDtoResumo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
@@ -21,6 +22,7 @@ public class UsuarioMapperResponse {
 
         UsuarioDto usuarioDto = modelMapper.map(usuario, UsuarioDto.class);
         usuarioDto.setSexo(Sexo.buscarSigla(usuario.getSexo()));
+        usuarioDto.getEndereco().setEstado(usuario.getEndereco().getEstado().toUpperCase());
         return usuarioDto;
     }
 

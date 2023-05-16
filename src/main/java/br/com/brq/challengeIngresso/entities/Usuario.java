@@ -3,7 +3,6 @@ package br.com.brq.challengeIngresso.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -18,7 +17,7 @@ public class Usuario {
     private String senha;
     private String apelido;
     private String dataNascimento;
-    private BigDecimal celular;
+    private Long celular;
     private String sexo;
     private OffsetDateTime dataCadastro;
     private OffsetDateTime dataAtualizacao;

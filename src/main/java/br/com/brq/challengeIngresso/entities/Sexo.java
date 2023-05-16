@@ -1,5 +1,8 @@
 package br.com.brq.challengeIngresso.entities;
 
+import lombok.Getter;
+
+@Getter
 public enum Sexo {
 
     M("1", "M"),
@@ -13,14 +16,6 @@ public enum Sexo {
     Sexo(String valor, String sigla) {
         this.valor = valor;
         this.sigla = sigla;
-    }
-
-    public String getValor() {
-        return valor;
-    }
-
-    public String getSigla() {
-        return sigla;
     }
 
      public static String buscarValor(String sigla){

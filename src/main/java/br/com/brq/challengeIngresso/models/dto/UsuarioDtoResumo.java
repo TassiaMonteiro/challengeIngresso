@@ -1,4 +1,4 @@
-package br.com.brq.challengeIngresso.models;
+package br.com.brq.challengeIngresso.models.dto;
 
 import lombok.Data;
 
