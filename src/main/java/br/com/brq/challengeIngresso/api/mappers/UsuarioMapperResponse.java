@@ -1,15 +1,14 @@
-package br.com.brq.challengeIngresso.mappers;
+package br.com.brq.challengeIngresso.api.mappers;
 
-import br.com.brq.challengeIngresso.entities.Sexo;
-import br.com.brq.challengeIngresso.entities.Usuario;
-import br.com.brq.challengeIngresso.models.dto.UsuarioDto;
-import br.com.brq.challengeIngresso.models.dto.UsuarioDtoResumo;
+import br.com.brq.challengeIngresso.domain.entities.Sexo;
+import br.com.brq.challengeIngresso.domain.entities.Usuario;
+import br.com.brq.challengeIngresso.api.models.dto.UsuarioDto;
+import br.com.brq.challengeIngresso.api.models.dto.UsuarioDtoResumo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component

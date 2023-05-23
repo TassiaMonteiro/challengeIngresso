@@ -1,4 +1,4 @@
-package br.com.brq.challengeIngresso.mappers;
+package br.com.brq.challengeIngresso.api.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

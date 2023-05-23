@@ -1,4 +1,4 @@
-package br.com.brq.challengeIngresso.entities;
+package br.com.brq.challengeIngresso.domain.entities;
 
 import lombok.Getter;
 

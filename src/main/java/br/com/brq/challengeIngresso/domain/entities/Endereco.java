@@ -1,4 +1,4 @@
-package br.com.brq.challengeIngresso.entities;
+package br.com.brq.challengeIngresso.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

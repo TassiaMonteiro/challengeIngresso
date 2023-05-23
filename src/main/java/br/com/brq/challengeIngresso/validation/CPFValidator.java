@@ -1,5 +1,7 @@
 package br.com.brq.challengeIngresso.validation;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.InputMismatchException;
@@ -16,6 +18,10 @@ public class CPFValidator implements ConstraintValidator<CPF, String> {
     public boolean isValid(String value, ConstraintValidatorContext context) {
 
         String CPF = value;
+
+        if (StringUtils.isBlank(CPF)){
+            return true;
+        }
 
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||

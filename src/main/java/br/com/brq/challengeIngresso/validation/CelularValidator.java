@@ -1,5 +1,7 @@
 package br.com.brq.challengeIngresso.validation;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;

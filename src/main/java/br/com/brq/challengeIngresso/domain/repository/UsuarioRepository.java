@@ -1,6 +1,6 @@
-package br.com.brq.challengeIngresso.repository;
+package br.com.brq.challengeIngresso.domain.repository;
 
-import br.com.brq.challengeIngresso.entities.Usuario;
+import br.com.brq.challengeIngresso.domain.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

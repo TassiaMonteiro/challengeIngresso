@@ -1,6 +1,6 @@
-package br.com.brq.challengeIngresso.models.input;
+package br.com.brq.challengeIngresso.api.models.input;
 
-import br.com.brq.challengeIngresso.entities.Endereco;
+import br.com.brq.challengeIngresso.domain.entities.Endereco;
 import br.com.brq.challengeIngresso.validation.CPF;
 import br.com.brq.challengeIngresso.validation.Celular;
 import br.com.brq.challengeIngresso.validation.DataNascimento;
