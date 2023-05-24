@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class SenhaDto {
 
-    private String id;
+    private String codigoSeguranca;
 }

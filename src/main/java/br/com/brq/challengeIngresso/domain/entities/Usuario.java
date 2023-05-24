@@ -3,6 +3,7 @@ package br.com.brq.challengeIngresso.domain.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -21,6 +22,8 @@ public class Usuario {
     private String sexo;
     private OffsetDateTime dataCadastro;
     private OffsetDateTime dataAtualizacao;
+    private String codigoSeguranca;
+    private LocalDateTime dataHoraCodigoSeguranca;
     @Embedded
     private Endereco endereco;
 

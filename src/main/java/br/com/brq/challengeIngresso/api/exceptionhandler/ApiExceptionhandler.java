@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,7 +31,7 @@ public class ApiExceptionhandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NegocioException.class)
     public ResponseEntity<?> handleNegocio(NegocioException ex, WebRequest request){
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         ProblemType problemType = ProblemType.ERRO_NEGOCIO;
         String detail = ex.getMessage();
 
@@ -180,6 +181,17 @@ public class ApiExceptionhandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
+    @Override
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers,
+                                                                         HttpStatus status, WebRequest request) {
+        ProblemType problemType = ProblemType.NAO_PERMITIDO;
+        String detail = "O metodo que você tentou acessar é inexistente.";
+        Problem problem = createProblemBuilder(status, problemType, detail)
+                .build();
+
+        return handleExceptionInternal(ex, problem, headers, status, request);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUncaught(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -219,5 +231,7 @@ public class ApiExceptionhandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, problem, headers, status, request);
     }
+
+
 }
 

@@ -1,5 +1,7 @@
 package br.com.brq.challengeIngresso.api.mappers;
 
+import br.com.brq.challengeIngresso.api.models.dto.SenhaDto;
+import br.com.brq.challengeIngresso.api.models.input.SenhaInput;
 import br.com.brq.challengeIngresso.domain.entities.Sexo;
 import br.com.brq.challengeIngresso.domain.entities.Usuario;
 import br.com.brq.challengeIngresso.api.models.dto.UsuarioDto;
@@ -33,6 +35,12 @@ public class UsuarioMapperResponse {
         return usuarios.stream()
                 .map(usuario -> toResumodto(usuario))
                 .collect(Collectors.toList());
+    }
+
+    public SenhaDto codigoToDto(Usuario usuario){
+        SenhaDto senhaDto = new SenhaDto();
+        senhaDto.setCodigoSeguranca(usuario.getCodigoSeguranca());
+        return senhaDto;
     }
 
 }

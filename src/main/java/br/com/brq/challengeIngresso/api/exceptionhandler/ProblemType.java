@@ -11,7 +11,8 @@ public enum ProblemType {
     PARAMETRO_INVALIDO("/parametro-invalido", "Parâmetro inválido"),
     DADOS_INVALIDOS("/dados-invalidos", "Dados inválidos"),
     ERRO_INTERNO("/erro-de-sistema", "Erro interno"),
-    MENSAGEM_IMCOMPREENSIVEL("/mensagem-imcompreensivel", "Mensagem imcompreensível");
+    MENSAGEM_IMCOMPREENSIVEL("/mensagem-imcompreensivel", "Mensagem imcompreensível"),
+    NAO_PERMITIDO("/metodo-nao-permitido", "Método nao permitido");
 
     private String title;
     private String type;

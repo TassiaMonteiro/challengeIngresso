@@ -1,5 +1,6 @@
 package br.com.brq.challengeIngresso.api.mappers;
 
+import br.com.brq.challengeIngresso.api.models.input.SenhaInput;
 import br.com.brq.challengeIngresso.domain.entities.Sexo;
 import br.com.brq.challengeIngresso.domain.entities.Usuario;
 import br.com.brq.challengeIngresso.api.models.input.UsuarioInput;

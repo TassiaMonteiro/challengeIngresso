@@ -80,19 +80,19 @@ public class UsuarioController {
         usuarioService.alterarSenha(id, senha.getSenhaAtual(), senha.getNovaSenha());
     }
 
+
     @GetMapping("/{id}/senhas")
     @ResponseStatus(HttpStatus.OK)
     public SenhaDto gerarCodigo(@PathVariable String id){
-        usuarioService.buscar(id);
-        SenhaDto senhaDto = new SenhaDto();
-        return usuarioService.gerarUUID(senhaDto.getId());
+        Usuario usuario = usuarioService.buscar(id);
+        usuario = usuarioService.gerarCodigo(usuario);
+        return mapperResponse.codigoToDto(usuario);
     }
 
     @PostMapping("/{id}/senhas")
     @ResponseStatus(HttpStatus.CREATED)
     public void novaSenha(@PathVariable String id, @RequestBody NovaSenhaInput novaSenhaInput){
-        usuarioService.isUUID(novaSenhaInput.getCodigoSeguranca());
-        usuarioService.novaSenha(id, novaSenhaInput.getNovaSenha());
+        usuarioService.novaSenha(id,novaSenhaInput.getCodigoSeguranca(), novaSenhaInput.getNovaSenha());
     }
 
 }
