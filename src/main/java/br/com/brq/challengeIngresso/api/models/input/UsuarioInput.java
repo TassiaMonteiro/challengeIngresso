@@ -1,6 +1,5 @@
 package br.com.brq.challengeIngresso.api.models.input;
 
-import br.com.brq.challengeIngresso.domain.entities.Endereco;
 import br.com.brq.challengeIngresso.validation.CPF;
 import br.com.brq.challengeIngresso.validation.Celular;
 import br.com.brq.challengeIngresso.validation.DataNascimento;
@@ -48,6 +47,6 @@ public class UsuarioInput {
 
     @Valid
     @NotNull(message = "Endereço é obrigatório.")
-    private Endereco endereco;
+    private EnderecoInput endereco;
 
 }

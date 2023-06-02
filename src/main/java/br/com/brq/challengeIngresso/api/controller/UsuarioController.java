@@ -1,15 +1,12 @@
 package br.com.brq.challengeIngresso.api.controller;
 
 import br.com.brq.challengeIngresso.api.models.dto.UsuarioDtoResumo;
-import br.com.brq.challengeIngresso.api.models.input.NovaSenhaInput;
-import br.com.brq.challengeIngresso.api.models.input.UsuarioInput;
+import br.com.brq.challengeIngresso.api.models.input.*;
 import br.com.brq.challengeIngresso.domain.entities.Usuario;
 import br.com.brq.challengeIngresso.api.mappers.UsuarioMapperRequest;
 import br.com.brq.challengeIngresso.api.mappers.UsuarioMapperResponse;
 import br.com.brq.challengeIngresso.api.models.dto.SenhaDto;
 import br.com.brq.challengeIngresso.api.models.dto.UsuarioDto;
-import br.com.brq.challengeIngresso.api.models.input.SenhaInput;
-import br.com.brq.challengeIngresso.api.models.input.UsuarioInputResumo;
 import br.com.brq.challengeIngresso.domain.repository.UsuarioRepository;
 import br.com.brq.challengeIngresso.domain.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +37,7 @@ public class UsuarioController {
     public UsuarioDto cadastrar(@RequestBody @Valid UsuarioInput usuarioInput){
         Usuario usuario = mapperRequest.toEntity(usuarioInput);
         usuarioService.validarCadastro(usuario);
+        usuarioService.validarEndereco(usuario);
         usuario = usuarioService.salvar(usuario);
 
         return mapperResponse.toDto(usuario);

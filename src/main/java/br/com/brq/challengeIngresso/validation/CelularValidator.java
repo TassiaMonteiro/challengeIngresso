@@ -20,6 +20,11 @@ public class CelularValidator implements ConstraintValidator<Celular, Long> {
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
+
+        if (value == null){
+            return true;
+        }
+
         String celular = String.valueOf(value);
 
         Matcher matcher = pattern.matcher(celular);

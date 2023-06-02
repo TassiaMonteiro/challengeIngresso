@@ -1,7 +1,6 @@
 package br.com.brq.challengeIngresso.api.mappers;
 
 import br.com.brq.challengeIngresso.api.models.dto.SenhaDto;
-import br.com.brq.challengeIngresso.api.models.input.SenhaInput;
 import br.com.brq.challengeIngresso.domain.entities.Sexo;
 import br.com.brq.challengeIngresso.domain.entities.Usuario;
 import br.com.brq.challengeIngresso.api.models.dto.UsuarioDto;
@@ -23,7 +22,6 @@ public class UsuarioMapperResponse {
 
         UsuarioDto usuarioDto = modelMapper.map(usuario, UsuarioDto.class);
         usuarioDto.setSexo(Sexo.buscarSigla(usuario.getSexo()));
-        usuarioDto.getEndereco().setEstado(usuario.getEndereco().getEstado().toUpperCase());
         return usuarioDto;
     }
 

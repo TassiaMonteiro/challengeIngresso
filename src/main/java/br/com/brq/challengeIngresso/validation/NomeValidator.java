@@ -11,7 +11,6 @@ public class NomeValidator implements ConstraintValidator<NomeCompleto, String> 
     public void initialize(NomeCompleto constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
-
     String regex = "^(?!.*(.)\\1{2,}).*[a-zA-Z]{2,}( {1,2}[a-zA-Z]{2,}){0,}$";
 
     Pattern p = Pattern.compile(regex);

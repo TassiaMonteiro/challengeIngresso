@@ -1,11 +1,12 @@
 package br.com.brq.challengeIngresso.domain.service;
 
+import br.com.brq.challengeIngresso.api.models.dto.EnderecoDto;
 import br.com.brq.challengeIngresso.domain.entities.Usuario;
 import br.com.brq.challengeIngresso.domain.exception.EntidadeEmConflitoException;
 import br.com.brq.challengeIngresso.domain.exception.EntidadeNaoEncontradaException;
 import br.com.brq.challengeIngresso.domain.exception.NegocioException;
 import br.com.brq.challengeIngresso.domain.repository.UsuarioRepository;
-import br.com.brq.challengeIngresso.validation.*;
+import br.com.brq.challengeIngresso.feign.ViaCepFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,13 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ViaCepFeign viaCepFeign;
+
+    public EnderecoDto executa (String CEP){
+        return viaCepFeign.buscaEnderecoCep(CEP);
+    }
+
     public void validarCadastro(Usuario usuario){
 
         if (usuarioRepository.existsByCpf(usuario.getCpf())){
@@ -30,21 +38,24 @@ public class UsuarioService {
         if (usuarioRepository.existsByEmail(usuario.getEmail())){
             throw new EntidadeEmConflitoException("Email já existe.");
         }
+    }
 
-        if (ValidaEstado.isEstado(usuario.getEndereco().getEstado()) == false){
-            throw new NegocioException("Estado inválido.");
+    public void validarEndereco(Usuario usuario){
+
+        if (usuario.getEndereco().getLogradouro() == null || usuario.getEndereco().getLogradouro().isBlank()){
+            throw new NegocioException("O campo logradouro deve ser preenchido.");
         }
 
-        if (!usuario.getEndereco().getPais().equals("BR")){
-            throw new NegocioException("O país deve ser BR.");
+        if (usuario.getEndereco().getBairro() == null || usuario.getEndereco().getBairro().isBlank()){
+            throw new NegocioException("O campo bairro deve ser preenchido.");
         }
-
     }
 
     public Usuario salvar(Usuario usuario){
         usuario.setId(UUID.randomUUID().toString());
         OffsetDateTime date = OffsetDateTime.now();
         usuario.setDataCadastro(date.truncatedTo(ChronoUnit.SECONDS));
+        usuario.getEndereco().setPais("BR");
         return usuarioRepository.save(usuario);
     }
 
@@ -58,6 +69,7 @@ public class UsuarioService {
     }
 
     public Usuario atualizar(Usuario usuario){
+        validarEndereco(usuario);
         dataAtualizacao(usuario);
         return usuarioRepository.save(usuario);
     }
